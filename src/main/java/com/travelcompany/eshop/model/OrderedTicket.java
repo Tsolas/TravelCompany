@@ -7,13 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderedTicket {
-
-    /* 
-    creating getter only for the id variables based on the logic that
-    once set by the system an id cannot change.
-     */
-    @Getter
-    private static int id = 0;
+//    this counter works as an id incrementor
+    private static int counter = 1;
+    private int id;
     private int passengerId;
     private int itineraryId;
     private PaymentMethod paymentMethod;
@@ -23,7 +19,8 @@ public class OrderedTicket {
         this.passengerId = passengerId;
         this.itineraryId = itineraryId;
         this.paymentMethod = paymentMethod;
-        id++;
+        this.id = counter;
+        counter++;
     }
 
     @Override

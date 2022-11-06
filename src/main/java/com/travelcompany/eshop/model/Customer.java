@@ -7,8 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Customer {
-
-    private static int id = 0;
+//    this counter works as an id incrementor
+    private static int counter = 1;
+    private int id;
     private String name;
     private String email;
     private String address;
@@ -21,7 +22,8 @@ public class Customer {
         this.address = address;
         this.nationality = nationality;
         this.customerCategory = customerCategory;
-        id++;
+        this.id = counter;
+        counter++;
     }
 
     @Override

@@ -6,13 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Itinerary {
-
-    /* 
-    creating getter only for the id variables based on the logic that
-    once set by the system an id cannot change.
-     */
-    @Getter
-    private static int id;
+//    this counter works as an id incrementor
+    private static int counter = 1;
+    private int id;
     private String departureAirportCode;
     private String destinationAirportCode;
     private String departureDate;
@@ -25,12 +21,10 @@ public class Itinerary {
         this.departureDate = departureDate;
         this.airlineName = airlineName;
         this.price = price;
+        this.id = counter;
         id++;
     }
 
-    /*
-    overide the toString method so as to print static field id
-    **/
     @Override
     public String toString() {
         return "Itinerary{" + "id= " + id + ", departureAirportCode= " + departureAirportCode + ", destinationAirportCode= " + destinationAirportCode + ", departureDate= " + departureDate + ", airlineName= " + airlineName + ", price= " + price + '}';
