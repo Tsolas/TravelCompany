@@ -1,14 +1,18 @@
 package com.travelcompany.eshop.model;
 
 import com.travelcompany.eshop.enums.CustomerCategory;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Customer {
 //    this counter works as an id incrementor
+
     private static int counter = 1;
+    @EqualsAndHashCode.Include
     private int id;
     private String name;
     private String email;
