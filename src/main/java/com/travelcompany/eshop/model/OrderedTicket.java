@@ -28,10 +28,7 @@ public class OrderedTicket {
 
     @Override
     public String toString() {
-        return "OrderedTickets{" +"id= " + id + ", passengerId=" + passengerId + ", itineraryId=" + itineraryId + ", paymentMethod=" + paymentMethod + ", paymentAmount=" + paymentAmount + '}';
+        return "OrderedTickets{" + "id= " + id + ", passengerId=" + passengerId + ", itineraryId=" + itineraryId + ", paymentMethod=" + paymentMethod + ", paymentAmount=" + paymentAmount + '}';
     }
-    
-    
-    
-}
 
+}

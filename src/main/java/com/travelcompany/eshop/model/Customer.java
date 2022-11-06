@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.travelcompany.eshop.model;
 
 import com.travelcompany.eshop.enums.CustomerCategory;
@@ -30,11 +26,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{"+"id= " + id + ", name= " + name + ", email= " + email + ", address= " + address + ", nationality= " + nationality + ", customerCategory= " + customerCategory + '}';
+        return "Customer{" + "id= " + id + ", name= " + name + ", email= " + email + ", address= " + address + ", nationality= " + nationality + ", customerCategory= " + customerCategory + '}';
     }
-    
-    
-    
-    
 
 }
