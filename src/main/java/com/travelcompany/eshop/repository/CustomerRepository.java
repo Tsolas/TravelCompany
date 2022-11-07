@@ -54,4 +54,28 @@ public class CustomerRepository {
             }
         }
     }
+
+    /**
+     * This method contains hard-coded mock data to be added in customers list
+     * could be updated to get data from external sources
+     */
+    public void populateCustomers() {
+        customers.add(new Customer("Maria Iordanou", "miordanou@mail.com", "Athens", "Greek", CustomerCategory.INDIVIDUAL));
+        customers.add(new Customer("Dimitriou Dimitrios", "ddimitriou@mail.com", "Athens", "Greek", CustomerCategory.INDIVIDUAL));
+        customers.add(new Customer("Ioannis Ioannou", "iioannou@mail.com", "Athens", "Greek", CustomerCategory.BUSINESS));
+        customers.add(new Customer("Antonio Molianri", "amolinari@mail.com", "Milan", "Italian", CustomerCategory.INDIVIDUAL));
+        customers.add(new Customer("Frederico Rossi", "frossi@mail.com", "Milan", "Italian", CustomerCategory.INDIVIDUAL));
+        customers.add(new Customer("Mario Conti", "mconti@mail.com", "Rome", "Italian", CustomerCategory.BUSINESS));
+        customers.add(new Customer("Nathan Martin", "nmartin@mail.com", "Lyon", "French", CustomerCategory.BUSINESS));
+        customers.add(new Customer("Enzo Collin", "ecollin@mail.com", "Lyon", "French", CustomerCategory.INDIVIDUAL));
+        customers.add(new Customer("Frederic Michel", "fmichel@mail.com", "Athens", "French", CustomerCategory.INDIVIDUAL));
+        customers.add(new Customer("Catalina Alvares", "calvares@mail.com", "Madrid", "Spanish", CustomerCategory.BUSINESS));
+        customers.add(new Customer("Axel Cortez", "acortez@mail.com", "Barcelona", "Spanish", CustomerCategory.BUSINESS));
+        customers.add(new Customer("Karl Schwarz", "kschwarz@mail.com", "Berlin", "German", CustomerCategory.BUSINESS));
+        customers.add(new Customer("Petra Muller", "pmuller@mail.com", "Munich", "German", CustomerCategory.INDIVIDUAL));
+        customers.add(new Customer("Joao Miguel", "jmiguel@mail.com", "Lisbon", "Portugese", CustomerCategory.BUSINESS));
+        customers.add(new Customer("Alda Costa", "acosta@mail.com", "Porto", "Portugese", CustomerCategory.INDIVIDUAL));
+
+    }
+
 }
