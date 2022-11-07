@@ -1,19 +1,15 @@
 package com.travelcompany.eshop.model;
 
 import com.travelcompany.eshop.enums.PaymentMethod;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class OrderedTicket {
+public class OrderedTicket extends Entities {
 //    this counter works as an id incrementor
 
     private static int counter = 1;
-    @EqualsAndHashCode.Include
-    private int id;
     private int passengerId;
     private int itineraryId;
     private PaymentMethod paymentMethod;
@@ -23,12 +19,12 @@ public class OrderedTicket {
         this.passengerId = passengerId;
         this.itineraryId = itineraryId;
         this.paymentMethod = paymentMethod;
-        this.id = counter;
+        this.setId(counter);
         counter++;
     }
 
     @Override
     public String toString() {
-        return "OrderedTickets{" + "id= " + id + ", passengerId=" + passengerId + ", itineraryId=" + itineraryId + ", paymentMethod=" + paymentMethod + ", paymentAmount=" + paymentAmount + '}';
+        return "OrderedTickets{" + "id= " + this.getId() + ", passengerId=" + passengerId + ", itineraryId=" + itineraryId + ", paymentMethod=" + paymentMethod + ", paymentAmount=" + paymentAmount + '}';
     }
 }

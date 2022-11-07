@@ -1,19 +1,15 @@
 package com.travelcompany.eshop.model;
 
 import com.travelcompany.eshop.enums.CustomerCategory;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Customer {
+public class Customer extends Entities {
 //    this counter works as an id incrementor
 
     private static int counter = 1;
-    @EqualsAndHashCode.Include
-    private int id;
     private String name;
     private String email;
     private String address;
@@ -26,13 +22,13 @@ public class Customer {
         this.address = address;
         this.nationality = nationality;
         this.customerCategory = customerCategory;
-        this.id = counter;
+        this.setId(counter);
         counter++;
     }
 
     @Override
     public String toString() {
-        return "Customer{" + "id= " + id + ", name= " + name + ", email= " + email + ", address= " + address + ", nationality= " + nationality + ", customerCategory= " + customerCategory + '}';
+        return "Customer{" + "id= " + this.getId() + ", name= " + name + ", email= " + email + ", address= " + address + ", nationality= " + nationality + ", customerCategory= " + customerCategory + '}';
     }
 
 }

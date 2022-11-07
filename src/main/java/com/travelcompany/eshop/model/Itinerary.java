@@ -1,18 +1,15 @@
 package com.travelcompany.eshop.model;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Itinerary {
+
+public class Itinerary extends Entities {
 //    this counter works as an id incrementor
 
     private static int counter = 1;
-    @EqualsAndHashCode.Include
-    private int id;
     private String departureAirportCode;
     private String destinationAirportCode;
     private String departureDate;
@@ -25,13 +22,13 @@ public class Itinerary {
         this.departureDate = departureDate;
         this.airlineName = airlineName;
         this.price = price;
-        this.id = counter;
+        this.setId(counter);
         counter++;
     }
 
     @Override
     public String toString() {
-        return "Itinerary{" + "id= " + id + ", departureAirportCode= " + departureAirportCode + ", destinationAirportCode= " + destinationAirportCode + ", departureDate= " + departureDate + ", airlineName= " + airlineName + ", price= " + price + '}';
+        return "Itinerary{" + "id= " + this.getId() + ", departureAirportCode= " + departureAirportCode + ", destinationAirportCode= " + destinationAirportCode + ", departureDate= " + departureDate + ", airlineName= " + airlineName + ", price= " + price + '}';
     }
 
 }
