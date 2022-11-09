@@ -63,7 +63,7 @@ public class DataImport {
         "8, 8, CREDIT_CARD",
         "10, 6, CASH",
         "11, 13, CREDIT_CARD",
-        "14, 14, CASH"
+        "3, 14, CASH"
     };
 
     public DataImport(CustomerRepository customerRepository, ItineraryRepository itineraryRepository, OrderedTicketRepository orderedticketRepository) {

@@ -1,5 +1,6 @@
 package com.travelcompany.eshop;
 
+import com.travelcompany.eshop.dto.Reports;
 import com.travelcompany.eshop.model.Customer;
 import com.travelcompany.eshop.model.Itinerary;
 import com.travelcompany.eshop.model.OrderedTicket;
@@ -12,6 +13,9 @@ import com.travelcompany.eshop.repository.impl.OrderedTicketRepositoryImpl;
 import com.travelcompany.eshop.services.TicketService;
 import com.travelcompany.eshop.services.TicketServiceImplementation;
 import com.travelcompany.eshop.util.DataImport;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TravelCompany {
 
@@ -36,6 +40,16 @@ public class TravelCompany {
             double amount = ticketService.calculatePrice(it.getPrice(), discount);
             ticket.setPaymentAmount(amount);
         }
-        System.out.println(ticketRepository.readAll());
+        //System.out.println(ticketRepository.readAll());
+
+        Reports report = new Reports();
+        Map<String, Integer> mpo = new HashMap<>();
+        mpo = report.getItinerariesPerDeparture(itineraryRepository.readAll());
+        //mpo.forEach((key, value) -> System.out.println(key + ":" + value));
+
+        List<Customer> custs = report.getNoTickets(ticketRepository, customerRepository);
+        for (Customer temp : custs) {
+            System.out.println(temp);
+        }
     }
 }
