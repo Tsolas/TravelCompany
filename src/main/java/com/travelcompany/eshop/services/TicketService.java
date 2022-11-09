@@ -2,6 +2,7 @@ package com.travelcompany.eshop.services;
 
 import com.travelcompany.eshop.enums.CustomerCategory;
 import com.travelcompany.eshop.enums.PaymentMethod;
+import com.travelcompany.eshop.exceptions.BusinessExceptions;
 
 public interface TicketService {
 
@@ -25,17 +26,38 @@ public interface TicketService {
      * @return Returns final price of the ticket
      */
     double calculatePrice(double price, double discount);
-}
 
-//    /**
-//     * This method saves a finalized ordered ticket after calculating discount
-//     * and final price
-//     *
-//     * @param customer
-//     * @param itinerary
-//     * @param paymentMethod
-//     * @param ticketRepository
-//     * @see calculateDiscount
-//     * @see calculatePrice
-//     */
-//    void orderTicket(Customer customer, Itinerary itinerary, PaymentMethod paymentMethod, OrderedTicketRepository ticketRepository);
+    /**
+     * Creates a new customer and inserts it in the repository
+     *
+     * @param name
+     * @param email
+     * @param address
+     * @param nationality
+     * @param customerCategory
+     * @throws com.travelcompany.eshop.exceptions.BusinessExceptions
+     */
+    void addCustomer(String name, String email, String address, String nationality, CustomerCategory customerCategory) throws BusinessExceptions;
+
+    /**
+     * Issues a ticket and inserts it in the repository
+     *
+     * @param passengerId
+     * @param itineraryId
+     * @param paymentMethod
+     * @throws BusinessExceptions
+     */
+    void issueTicket(int passengerId, int itineraryId, PaymentMethod paymentMethod) throws BusinessExceptions;
+
+    /**
+     * Creates a new itinerary and inserts it in the repository
+     *
+     * @param departureAirportCode
+     * @param destinationAirportCode
+     * @param departureDate
+     * @param airlineName
+     * @param price
+     * @throws BusinessExceptions
+     */
+    void addItinerary(String departureAirportCode, String destinationAirportCode, String departureDate, String airlineName, double price) throws BusinessExceptions;
+}

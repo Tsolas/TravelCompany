@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
 package com.travelcompany.eshop;
 
 import com.travelcompany.eshop.model.Customer;
@@ -17,20 +13,17 @@ import com.travelcompany.eshop.services.TicketService;
 import com.travelcompany.eshop.services.TicketServiceImplementation;
 import com.travelcompany.eshop.util.DataImport;
 
-/**
- *
- * @author Giorgos
- */
 public class TravelCompany {
 
     public static void main(String[] args) {
+
         OrderedTicketRepository ticketRepository = new OrderedTicketRepositoryImpl();
 
         CustomerRepository customerRepository = new CustomerRepositoryImpl();
 
         ItineraryRepository itineraryRepository = new ItineraryRepositoryImpl();
 
-        TicketService ticketService = new TicketServiceImplementation();
+        TicketService ticketService = new TicketServiceImplementation(customerRepository, itineraryRepository, ticketRepository);
         DataImport dataImport = new DataImport(customerRepository, itineraryRepository, ticketRepository);
         dataImport.insertTickets();
         dataImport.insertCustomers();
