@@ -13,26 +13,29 @@ import com.travelcompany.eshop.repository.impl.OrderedTicketRepositoryImpl;
 import com.travelcompany.eshop.services.TicketService;
 import com.travelcompany.eshop.services.TicketServiceImplementation;
 import com.travelcompany.eshop.util.DataImport;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.travelcompany.eshop.util.JsonPrint;
 
 public class TravelCompany {
 
     public static void main(String[] args) {
-
+        //instansiate the repositories
         OrderedTicketRepository ticketRepository = new OrderedTicketRepositoryImpl();
-
         CustomerRepository customerRepository = new CustomerRepositoryImpl();
-
         ItineraryRepository itineraryRepository = new ItineraryRepositoryImpl();
 
+        //instansiate the services
         TicketService ticketService = new TicketServiceImplementation(customerRepository, itineraryRepository, ticketRepository);
+
+        //instantiate the utilities
         DataImport dataImport = new DataImport(customerRepository, itineraryRepository, ticketRepository);
+        JsonPrint output = new JsonPrint(customerRepository, itineraryRepository, ticketRepository);
+
+        //populate the repositories
         dataImport.insertTickets();
         dataImport.insertCustomers();
         dataImport.insertItineraries();
 
+        //calculate and insert the Payment amount for each ticket
         for (OrderedTicket ticket : ticketRepository.readAll()) {
             Customer customer = customerRepository.read(ticket.getPassengerId());
             double discount = ticketService.calculateDiscount(customer.getCustomerCategory(), ticket.getPaymentMethod());
@@ -40,16 +43,17 @@ public class TravelCompany {
             double amount = ticketService.calculatePrice(it.getPrice(), discount);
             ticket.setPaymentAmount(amount);
         }
-        //System.out.println(ticketRepository.readAll());
 
+        //instatiate the reports
         Reports report = new Reports();
-        Map<String, Integer> mpo = new HashMap<>();
-        mpo = report.getItinerariesPerDeparture(itineraryRepository.readAll());
-        //mpo.forEach((key, value) -> System.out.println(key + ":" + value));
 
-        List<Customer> custs = report.getNoTickets(ticketRepository, customerRepository);
-        for (Customer temp : custs) {
-            System.out.println(temp);
-        }
+        //print the results
+        output.printNumberCost(report);
+        output.printItinerariesPerDestination(report);
+        output.printItinerariesPerDeparture(report);
+        output.printMostTickets(report);
+        output.printLargestCost(report);
+        output.printNoTickets(report);
+
     }
 }

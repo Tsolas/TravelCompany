@@ -4,6 +4,7 @@ import com.travelcompany.eshop.model.Customer;
 import com.travelcompany.eshop.model.Itinerary;
 import com.travelcompany.eshop.model.OrderedTicket;
 import com.travelcompany.eshop.repository.CustomerRepository;
+import com.travelcompany.eshop.repository.ItineraryRepository;
 import com.travelcompany.eshop.repository.OrderedTicketRepository;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,38 +13,47 @@ import java.util.Map;
 
 public class Reports {
 
+    private int numberOfTickets;
+    private double costOfTickets;
+
     /**
      * Calculates the total number of Tickets fo all customers
      *
-     * @param tickets
-     * @return
+     * @param ticketRepository
+     *
      */
-    public int calculateNumberOfTickets(List<OrderedTicket> tickets) {
-        return tickets.size();
+    public void calculateNumberOfTickets(OrderedTicketRepository ticketRepository) {
+        List<OrderedTicket> tickets = new ArrayList<>();
+        tickets = ticketRepository.readAll();
+        this.numberOfTickets = tickets.size();
     }
 
     /**
      * Calculates the total cost of the tickets of all customers
      *
-     * @param tickets
-     * @return
+     * @param ticketRepository
+     *
      */
-    public double calculateCostOfTickets(List<OrderedTicket> tickets) {
+    public void calculateCostOfTickets(OrderedTicketRepository ticketRepository) {
+        List<OrderedTicket> tickets = new ArrayList<>();
+        tickets = ticketRepository.readAll();
         double total = 0;
         for (OrderedTicket obj : tickets) {
-            total = +obj.getPaymentAmount();
+            total = total + obj.getPaymentAmount();
         }
-        return total;
+        this.costOfTickets = total;
     }
 
     /**
      * Finds total offered itineraries per destination airport. It uses the
      * HashMaps ability to overwrite duplicate keys
      *
-     * @param itineraries
+     * @param itineraryRepository
      * @return
      */
-    public Map<String, Integer> getItinerariesPerDestination(List<Itinerary> itineraries) {
+    public Map<String, Integer> getItinerariesPerDestination(ItineraryRepository itineraryRepository) {
+        List<Itinerary> itineraries = new ArrayList<>();
+        itineraries = itineraryRepository.readAll();
         Map<String, Integer> temp = new HashMap<>();
         for (Itinerary obj : itineraries) {
             int counter = 0;
@@ -61,10 +71,12 @@ public class Reports {
      * Finds total offered itineraries per departure airport. It uses the
      * HashMaps ability to overwrite duplicate keys
      *
-     * @param itineraries
+     * @param itineraryRepository
      * @return
      */
-    public Map<String, Integer> getItinerariesPerDeparture(List<Itinerary> itineraries) {
+    public Map<String, Integer> getItinerariesPerDeparture(ItineraryRepository itineraryRepository) {
+        List<Itinerary> itineraries = new ArrayList<>();
+        itineraries = itineraryRepository.readAll();
         Map<String, Integer> temp = new HashMap<>();
         for (Itinerary obj : itineraries) {
             int counter = 0;
