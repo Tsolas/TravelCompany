@@ -1,9 +1,6 @@
 package com.travelcompany.eshop;
 
 import com.travelcompany.eshop.dto.Reports;
-import com.travelcompany.eshop.model.Customer;
-import com.travelcompany.eshop.model.Itinerary;
-import com.travelcompany.eshop.model.OrderedTicket;
 import com.travelcompany.eshop.repository.CustomerRepository;
 import com.travelcompany.eshop.repository.ItineraryRepository;
 import com.travelcompany.eshop.repository.OrderedTicketRepository;
@@ -36,13 +33,7 @@ public class TravelCompany {
         dataImport.insertItineraries();
 
         //calculate and insert the Payment amount for each ticket
-        for (OrderedTicket ticket : ticketRepository.readAll()) {
-            Customer customer = customerRepository.read(ticket.getPassengerId());
-            double discount = ticketService.calculateDiscount(customer.getCustomerCategory(), ticket.getPaymentMethod());
-            Itinerary it = itineraryRepository.read(ticket.getItineraryId());
-            double amount = ticketService.calculatePrice(it.getPrice(), discount);
-            ticket.setPaymentAmount(amount);
-        }
+        ticketService.setAmount(customerRepository, itineraryRepository, ticketRepository);
 
         //instatiate the reports
         Reports report = new Reports();
@@ -54,6 +45,5 @@ public class TravelCompany {
         output.printMostTickets(report);
         output.printLargestCost(report);
         output.printNoTickets(report);
-
     }
 }

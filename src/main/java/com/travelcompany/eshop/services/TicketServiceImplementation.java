@@ -105,4 +105,16 @@ public class TicketServiceImplementation implements TicketService {
         Itinerary itinerary = new Itinerary(departureAirportCode, destinationAirportCode, departureDate, airlineName, price);
         itineraryRepository.create(itinerary);
     }
+
+    @Override
+    public void setAmount(CustomerRepository customerRepository, ItineraryRepository itineraryRepository, OrderedTicketRepository ticketRepository) {
+        for (OrderedTicket ticket : ticketRepository.readAll()) {
+            Customer customer = customerRepository.read(ticket.getPassengerId());
+            double discount = this.calculateDiscount(customer.getCustomerCategory(), ticket.getPaymentMethod());
+            Itinerary it = itineraryRepository.read(ticket.getItineraryId());
+            double amount = this.calculatePrice(it.getPrice(), discount);
+            ticket.setPaymentAmount(amount);
+        }
+    }
+
 }

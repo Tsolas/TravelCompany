@@ -3,6 +3,9 @@ package com.travelcompany.eshop.services;
 import com.travelcompany.eshop.enums.CustomerCategory;
 import com.travelcompany.eshop.enums.PaymentMethod;
 import com.travelcompany.eshop.exceptions.BusinessExceptions;
+import com.travelcompany.eshop.repository.CustomerRepository;
+import com.travelcompany.eshop.repository.ItineraryRepository;
+import com.travelcompany.eshop.repository.OrderedTicketRepository;
 
 public interface TicketService {
 
@@ -60,4 +63,16 @@ public interface TicketService {
      * @throws BusinessExceptions
      */
     void addItinerary(String departureAirportCode, String destinationAirportCode, String departureDate, String airlineName, double price) throws BusinessExceptions;
+
+    /**
+     * Calculates and set the Final amount to be payed for the ticket
+     *
+     * @param customerRepository
+     * @param itineraryRepository
+     * @param ticketRepository Uses the
+     * {@link #calculatePrice(double price, double discount) caclulatePrice} and
+     * {@link #calculateDiscount(CustomerCategory customerCategory, PaymentMethod paymentMethod) caclulateDiscount}
+     * methods
+     */
+    void setAmount(CustomerRepository customerRepository, ItineraryRepository itineraryRepository, OrderedTicketRepository ticketRepository);
 }
